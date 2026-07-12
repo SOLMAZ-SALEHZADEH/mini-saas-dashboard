@@ -3,6 +3,7 @@ import { formatCurrency } from "@/shared/utils/format-currency";
 import {Coin} from "../types/Coin"
 import Image from "next/image";
 import { formatPercentage } from "@/shared/utils/format-percentage";
+import Link from "next/link";
 interface MarketTableProps {
     coins :Coin[]
 }
@@ -23,11 +24,13 @@ export default function MarketTable({coins} : MarketTableProps){
   <tbody>
       {coins.map((coin)=>
         (
-            <tr className="border-b" key={coin.id}>
+
+            <tr className="border-b"  key={coin.id}>
             <td className="p-4">
                 {coin.market_cap_rank}
             </td>
             <td className="p-4">
+            <Link key={coin.id} href={`/market/${coin.id}`}>
             <div className="flex items-center gap-2">
             <Image
                 src={coin.image}
@@ -37,6 +40,7 @@ export default function MarketTable({coins} : MarketTableProps){
             />
               {coin.name}
               </div>
+              </Link>
             </td>
             <td className="p-4">{coin.symbol.toUpperCase()}</td>
             <td className="p-4">
